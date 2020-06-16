@@ -84,3 +84,23 @@ for (i = 0; i < enemyName.length; i ++) {
     break;
   }
 };
+
+// If enemy health is <= 0
+  // * Prompt user to REFILL health, UPGRADE attack, or LEAVE store
+  // REFILL health
+    // Confirm health refill
+    // +(Health Refill)
+    // Continue with fight
+  // Upgrade attack
+    // Confirm attack upgrade
+    // Add attack power
+    // Continue fight
+  // LEAVE Store
+    // Confirm leave
+    // Continue fight
+
+startGame()
+
+endGame()
+
+shop()
