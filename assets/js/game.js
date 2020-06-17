@@ -28,6 +28,7 @@ var fight = function(enemyName) {
         console.log("playerMoney " + playerMoney);
         break;
       }
+      
     }
 
     if (promptFight === "fight" || promptFight === "FIGHT")
