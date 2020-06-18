@@ -17,6 +17,7 @@ var fight = function(enemyName) {
     // Ask the user if they would like to start or skip the fight
     var promptFight = prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to continue.");
 
+    // Allows user to skip fight
     if (promptFight === "skip" || promptFight === "SKIP") {
       // Confirm quit
       var confirmSkip = confirm("Are sure you'd like to quit?");
@@ -28,10 +29,9 @@ var fight = function(enemyName) {
         console.log("playerMoney " + playerMoney);
         break;
       }
-      
     }
 
-    if (promptFight === "fight" || promptFight === "FIGHT")
+    if (promptFight === "fight" || promptFight === "FIGHT") {
 
       //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
         enemyHealth = enemyHealth - playerAttack ;
