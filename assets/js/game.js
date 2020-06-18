@@ -11,7 +11,7 @@ var enemyName = "Roborto";
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function(enemyName) {
+var fight = function (enemyName) {
   // Ask the user if they would like to start or skip the fight
   var promptFight = prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to continue.");
 
@@ -33,7 +33,7 @@ var fight = function(enemyName) {
       console.log(
         playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
       );
-    
+
       // If the enemy has died
       if (enemyHealth <= 0) {
         // Alert the player the enemy has died
@@ -41,11 +41,11 @@ var fight = function(enemyName) {
         // Then award player +20 money for winning
         playerMoney = playerMoney + 20;
         break;
-        } /* If the enmy has not died*/
-          else {
-          // Alert the player how much health the enemy has remaining
-          alert(enemyName + " still has " + enemyHealth + " health left.");
-          }
+      } /* If the enmy has not died*/
+      else {
+        // Alert the player how much health the enemy has remaining
+        alert(enemyName + " still has " + enemyHealth + " health left.");
+      }
     }
 
     // Subtract enemyAttack from playerHealth and log value
@@ -53,14 +53,14 @@ var fight = function(enemyName) {
     // Log a resulting message to console for attack
     console.log(
       enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
-     );
-    
+    );
+
     //  CHeck player health is above 0
     if (playerHealth <= 0) {
       alert(playerName + " has died!");
       break;
     } /* Alert how much health player robot still has */
-      else {
+    else {
       alert(playerName + " still has " + playerHealth + " health left.");
     }
   }
