@@ -1,8 +1,5 @@
 debugger;
 
-// Prints player name, health, and attack to console
-console.log(playerInfo.name, playerInfo.health, playerInfo.attack);
-
 function fight (enemy) {
   while (enemy.health > 0 && playerInfo.health > 0) {
       // Ask the user if they would like to start or skip the fight
@@ -86,9 +83,18 @@ var enemyInfo = [
   }
 ];
 
+function getPlayerName() {
+  var name = "";
+  while (name.trim() === "" || name.trim() === null) {
+    name = prompt("What is your robot's name?");
+  };
+  console.log("Player name is " + name);
+  return name;
+}
+
 // Define player attributes
 var playerInfo = {
-  name: prompt("What is your robot's name?"),
+  name: getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
@@ -116,6 +122,9 @@ var playerInfo = {
     }
   }
 };
+
+// Prints player name, health, and attack to console
+console.log(playerInfo.name, playerInfo.health, playerInfo.attack);
 
 function startGame(){
     // Reset Player Attributes And Money
