@@ -1,44 +1,69 @@
 debugger;
 
 function fight (enemy) {
+  // Set player to go first
+  var isPlayerTurn = true;
+  // If Math.random < .5 then
+  if (Math.random() > .5) {
+    // set it to be the enemyRobot's turn
+    isPlayerTurn = false;
+  };
+
   while (enemy.health > 0 && playerInfo.health > 0) {
-    if (fightOrSkip()) {
-      break;
-    }
-    // Randomize the damage 
-    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-    enemy.health = Math.max(0, enemy.health - damage);
-    console.log(playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
-
-    // If the enemy has died
-    if (enemy.health <= 0) {
-      // Alert the player the enemy has died
-      console.log(enemy.name + " has died.");
-      // Then award player +20 money for winning
-      playerInfo.money = playerInfo.money + 20;
-      break;
-    } /* If the enemy has not died*/
-    else {
-      // Alert the player how much health the enemy has remaining
-      console.log(enemy.name + " still has " + enemy.health + " health left.");
-
-    }
-
-    var damage = randomNumber(enemy.attack - 3, enemy.attack);
-    playerInfo.health = Math.max(0, playerInfo.health - damage);
-
-    // Log a resulting message to console for attack
-    console.log(enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining.");
-
-    //  CHeck player health is above 0
-    if (playerInfo.health <= 0) {
-      console.log(playerInfo.name + " has died!");
-      break;
-    } /* Alert how much health player robot still has */
-    else {
-      console.log(playerInfo.name + " still has " + playerInfo.health + " health left.");
-    }
-    }
+    // If it is the player's turn
+    if (isPlayerTurn) {
+      // ask the user if they'd like to fight or skip this fight
+      if (fightOrSkip()) {
+        // if they choose to skip then break out of the loop
+        break;
+      } else { /* If the player chooses to fight then*/
+          // Randomize the damage the player will do
+          var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+          // Subtract player's damage from the enemies health
+          enemy.health = Math.max(0, enemy.health - damage);
+          // Log how much damage the player's robot has done
+          console.log(playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining.");
+        }
+      // If the enemy's health is below 0
+      if (enemy.health <= 0) {
+        // then log that the enemies robot has died
+        console.log(enemy.name + " has died.");
+        // award the user +20 money
+        playerInfo.money = playerInfo.money + 20;
+        // leave the loop
+        break;
+      } 
+      else { /* If enemies robot is still alive */
+        // Log how much health the enemy has
+        console.log(enemy.name + " still has " + enemy.health + " health left.");
+      }
+    } else { /* If it is not the player's turn */
+        // ask the user if they'd like to fight or skip this fight
+        if (fightOrSkip()) {
+          // if they choose to skip then break out of the loop
+          break;
+        }   
+        // Randomize the damage the enemies robot will do
+        var damage = randomNumber(enemy.attack - 3, enemy.attack);
+        // Subtract the enemies damage from the player's health
+        playerInfo.health = Math.max(0, playerInfo.health - damage);
+        // Log how much damage the enemies robot has done
+        console.log(enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining.");
+        // If the player's health is less than 0
+        if (playerInfo.health <= 0) {
+          // Log that the player has died
+          console.log(playerInfo.name + " has died!");
+          // Break out of the loop
+          break;
+        } 
+          else { /* If the player's robot is still alive */
+            // Log how much health the player has
+            console.log(playerInfo.name + " still has " + playerInfo.health + " health left.");
+          }
+      }
+    // Reverse turns for the next round
+    isPlayerTurn = !isPlayerTurn;
+    };
   }
 
 
@@ -91,7 +116,7 @@ var playerInfo = {
     }
   },
   upgradeAttack: function() {
-    if (playerMoney >= 7) {
+    if (this.money >= 7) {
       console.log("Upgrading player's attack by 6 for 7 dollars");
       this.attack += 6;
       this.money -= 7;
@@ -108,7 +133,7 @@ function randomNumber(min, max) {
 };
 
 // Prints player name, health, and attack to console
-console.log(playerInfo.name, playerInfo.health, playerInfo.attack);
+console.log("Name: " + playerInfo.name + ", Health: " + playerInfo.health + ", Attack: " playerInfo.attack);
 
 function startGame(){
     // Reset Player Attributes And Money
