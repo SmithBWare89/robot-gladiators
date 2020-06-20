@@ -1,11 +1,10 @@
 debugger;
 
 function fight (enemy) {
-  while (enemy.health > 0 && playerInfo.health > 0) {    
-    fightOrSkip(enemy);
-    // Alert the user of the enemies stats
-    console.log(enemy.name + " is starting this round with  " + enemy.health + " health and will do " + enemy.attack + " damage.");
-
+  while (enemy.health > 0 && playerInfo.health > 0) {
+    if (fightOrSkip()) {
+      break;
+    }
     // Randomize the damage 
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
     enemy.health = Math.max(0, enemy.health - damage);
@@ -182,24 +181,21 @@ function shop() {
       shop();
       break;
   }
+
 };
 
 function fightOrSkip(enemy) {
   // Ask the user if they would like to start or skip the fight
   var promptFight = prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to continue.");
+  promptFight = promptFight.toLowerCase();
 
   // while promptFight is empty or null
   if (!promptFight.trim()) {
     return fightOrSkip();
   }
-  
-  // If the user chooses to fight then
-  if (promptFight === "fight" || promptFight === "FIGHT") {
-    return promptFight;
-  }  
 
   // Allows user to skip fight
-  if (promptFight === "skip" || promptFight === "SKIP") {
+  if (promptFight === "skip") {
     // CONFIRM EXIT
     var confirmSkip = confirm("Are you sure you'd like to quit?");
     // If yes then skip this fight
@@ -209,12 +205,15 @@ function fightOrSkip(enemy) {
       playerInfo.money = Math.max(0, playerInfo.money - 10);
       // Go into the shop
       shop();
+      return true;
     }       
     
     else {
       console.log("pick a valid option!");
     }
   }
+
+  return false;
 }
 
 // start the game when the page loads
