@@ -133,7 +133,14 @@ function randomNumber(min, max) {
 };
 
 // Prints player name, health, and attack to console
-console.log("Name: " + playerInfo.name + ", Health: " + playerInfo.health + ", Attack: " playerInfo.attack);
+console.log(
+    "Name: " + 
+    playerInfo.name + 
+    ", Health: " + 
+    playerInfo.health + 
+    ", Attack: " + 
+    playerInfo.attack
+);
 
 function startGame(){
     // Reset Player Attributes And Money
@@ -167,11 +174,32 @@ function startGame(){
 function endGame() {
   console.log("The game has now ended. Let's see how you did!");
   // If player is still alive then the player wins!
+    // Retrieve the current high score from localStorage
+    var highscore = localStorage.getItem("highscore");
+
   if (playerInfo.health > 0) {
-    console.log("Great job, you've survived the game! You now have a score of " + playerInfo.money);
-  } else {
-    console.log("You've lost your robot in battle");
-  }
+    // When the game has ended and we've survived facing all the robots:
+    // Compare the player robot score with the current high score
+    if (highscore === null) {
+      highscore = 0;
+      localStorage.setItem("highscore", 0);
+    }
+
+    // If the player score is higher
+    if (playerInfo.money > highscore) {
+      // Set new high score object into localStorage
+      localStorage.setItem("highscore", playerInfo.money);
+      // Set new player robot's name object into localStorage
+      localStorage.setItem("name", playerInfo.name);
+      // Send player the message that they beat the high score
+      console.log(playerInfo.name + " now has a high score of " + playerInfo.money)
+    }
+  } 
+    else {
+      console.log("You've lost your robot in battle");
+      console.log(playerInfo.name + " did not beat the highscore of " + highscore + ". Maybe next time!");
+    }  
+
   // Ask the player if they'd like to play again
   var playAgainConfirm = confirm("Would you like to play again?");
   if (playAgainConfirm) {
