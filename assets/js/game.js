@@ -152,9 +152,10 @@ function startGame(){
         console.log("Welcome to Robot Gladiators! Round " + (i + 1));
         // Picks the enemy name based on their index in the array
         var pickedEnemyObj = enemyInfo[i];
-        // pass each pickedEnemyName variable into the fight function
+        // pass enemy picked from the enemyInfo index into fight function
         fight(pickedEnemyObj);
-        // if a players health is above 0 and we're not at the last enemy then go to the shop
+
+        // check is play health is above 0 and there are no more enemies
         if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
           var storeConfirm = confirm("The fight is over, visit the store before the next round?");
           if(storeConfirm) {
@@ -267,5 +268,4 @@ function fightOrSkip(enemy) {
   return false;
 }
 
-// start the game when the page loads
-startGame();
+document.getElementById("startGame").addEventListener("click", startGame);
