@@ -1,5 +1,3 @@
-debugger;
-
 function fight (enemy) {
   // Set player to go first
   var isPlayerTurn = true;
@@ -268,4 +266,4 @@ function fightOrSkip(enemy) {
   return false;
 }
 
-document.getElementById("startGame").addEventListener("click", startGame);
+startGame();
